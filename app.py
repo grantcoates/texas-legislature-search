@@ -32,11 +32,15 @@ if search_term:
             width: 100%;
         }
         table.wrapped th, table.wrapped td {
-            white-space: normal;
+            white-space: pre-wrap;
             word-wrap: break-word;
             overflow-wrap: break-word;
             padding: 8px;
             border: 1px solid #ddd;
+        }
+        table.wrapped th {
+            text-align: center;
+            background-color: #f2f2f2; /* optional: change or remove */
         }
         </style>
         """
