@@ -13,15 +13,14 @@ else:
 st.title("Texas Legislature Committee Assignments Search")
 
 # Search function
-search_term = st.text_input("Search for a Name or Committee:")
+search_term = st.text_input("Search for a Name, Committee, or Role:")
 
 if search_term:
-    results = df[df.apply(lambda row: search_term.lower() in row.to_string().lower(), axis=1)]
-    
-    # Checkbox to filter for only chairs (based on the "Role" column)
-    show_only_chairs = st.checkbox("Show only chairs")
-    if show_only_chairs:
-        results = results[results['Role'].str.lower() == 'chair']
+    # If the user types "chair" or "chairs", filter by Role
+    if search_term.lower() in ["chair", "chairs"]:
+        results = df[df['Role'].str.lower() == 'chair']
+    else:
+        results = df[df.apply(lambda row: search_term.lower() in row.to_string().lower(), axis=1)]
     
     if not results.empty:
         st.dataframe(results, use_container_width=True)
@@ -29,11 +28,3 @@ if search_term:
         st.write("No results found.")
 else:
     st.write("Enter a search term above to find committee assignments.")
-
-# Additional section: List of All Chairs
-st.subheader("All Committee Chairs")
-chairs = df[df['Role'].str.lower() == 'chair']
-if not chairs.empty:
-    st.dataframe(chairs, use_container_width=True)
-else:
-    st.write("No chairs found.")
