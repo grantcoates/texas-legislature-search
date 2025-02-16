@@ -21,10 +21,13 @@ if search_term:
     else:
         results = df[df.apply(lambda row: search_term.lower() in row.to_string().lower(), axis=1)]
     
+    # Replace NaN with empty strings so they don't display as "nan"
+    results = results.fillna("")
+    
     if not results.empty:
         # Convert the DataFrame to an HTML table with a custom CSS class.
         html_table = results.to_html(classes="wrapped", index=False, escape=False)
-        # Define custom CSS for the table.
+        # Define custom CSS for the table, centering headers and forcing text color to black.
         css = """
         <style>
         table.wrapped {
@@ -37,6 +40,7 @@ if search_term:
             overflow-wrap: break-word;
             padding: 8px;
             border: 1px solid #ddd;
+            color: black;
         }
         table.wrapped th {
             text-align: center;
