@@ -27,12 +27,13 @@ if search_term:
     if not results.empty:
         # Convert the DataFrame to an HTML table with a custom CSS class.
         html_table = results.to_html(classes="wrapped", index=False, escape=False)
-        # Define custom CSS for the table, centering headers and forcing text color to black.
+        # Define custom CSS for the table:
         css = """
         <style>
         table.wrapped {
             table-layout: fixed;
             width: 100%;
+            background-color: white !important; /* Force background to white */
         }
         table.wrapped th, table.wrapped td {
             white-space: pre-wrap;
@@ -40,11 +41,11 @@ if search_term:
             overflow-wrap: break-word;
             padding: 8px;
             border: 1px solid #ddd;
-            color: black;
+            color: black; /* Force text color to black */
         }
         table.wrapped th {
             text-align: center;
-            background-color: #f2f2f2; /* optional: change or remove */
+            background-color: #f2f2f2 !important; /* Header background color */
         }
         </style>
         """
