@@ -18,7 +18,7 @@ search_term = st.text_input("Search for a Name or Committee:")
 if search_term:
     results = df[df.apply(lambda row: search_term.lower() in row.to_string().lower(), axis=1)]
     if not results.empty:
-        st.dataframe(results, width=800)  # Keeps column formatting & allows scrolling
+        st.dataframe(results, use_container_width=True)  # Keeps column formatting & allows scrolling
     else:
         st.write("No results found.")
 else:
