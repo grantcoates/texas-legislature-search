@@ -17,10 +17,15 @@ search_term = st.text_input("Search for a Name or Committee:")
 
 if search_term:
     results = df[df.apply(lambda row: search_term.lower() in row.to_string().lower(), axis=1)]
+    
+    # Checkbox to filter for only chairs (based on the "Role" column)
+    show_only_chairs = st.checkbox("Show only chairs")
+    if show_only_chairs:
+        results = results[results['Role'].str.lower() == 'chair']
+    
     if not results.empty:
-        st.dataframe(results, use_container_width=True)  # Keeps column formatting & allows scrolling
+        st.dataframe(results, use_container_width=True)
     else:
         st.write("No results found.")
 else:
     st.write("Enter a search term above to find committee assignments.")
-
