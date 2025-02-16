@@ -2,6 +2,20 @@ import os
 import pandas as pd
 import streamlit as st
 
+# Inject custom CSS to force text wrapping in the dataframe cells
+st.markdown(
+    """
+    <style>
+    .stDataFrame table tr th,
+    .stDataFrame table tr td {
+        white-space: normal;
+        word-wrap: break-word;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 file_path = "committees.xlsx"  # Ensure this matches the GitHub filename
 
 if os.path.exists(file_path):
