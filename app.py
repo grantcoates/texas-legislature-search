@@ -2,14 +2,15 @@ import os
 import pandas as pd
 import streamlit as st
 
-# Inject custom CSS to force text wrapping in the dataframe cells
+# Inject custom CSS to force text wrapping with fixed max width for table cells
 st.markdown(
     """
     <style>
     .stDataFrame table tr th,
     .stDataFrame table tr td {
-        white-space: normal;
-        word-wrap: break-word;
+        max-width: 150px !important;
+        white-space: normal !important;
+        overflow-wrap: break-word;
     }
     </style>
     """,
