@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
 
 file_path = "committees.xlsx"  # Ensure this matches the GitHub filename
 
@@ -21,9 +22,9 @@ if search_term:
         results = df[df.apply(lambda row: search_term.lower() in row.to_string().lower(), axis=1)]
     
     if not results.empty:
-        # Convert the filtered DataFrame to HTML with a custom CSS class
+        # Convert the DataFrame to an HTML table with a custom CSS class.
         html_table = results.to_html(classes="wrapped", index=False, escape=False)
-        # Define CSS for the table: fixed layout and text wrapping
+        # Define custom CSS for the table.
         css = """
         <style>
         table.wrapped {
@@ -39,8 +40,8 @@ if search_term:
         }
         </style>
         """
-        # Display the HTML table with the CSS
-        st.markdown(css + html_table, unsafe_allow_html=True)
+        # Render the HTML table with CSS using components.html.
+        components.html(css + html_table, height=400, scrolling=True)
     else:
         st.write("No results found.")
 else:
