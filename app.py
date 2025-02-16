@@ -2,14 +2,10 @@ import os
 import pandas as pd
 import streamlit as st
 
-# Debugging: Show all files to confirm "committees.xlsx" exists
-st.write("📂 Files in Directory:", os.listdir("."))  # Lists files in the directory
-
 file_path = "committees.xlsx"  # Ensure this matches the GitHub filename
 
 if os.path.exists(file_path):
-   df = pd.read_excel("committees.xlsx")  # Uses relative path
-   st.write("✅ File Loaded:", df.shape)  # Debugging line to confirm data loads correctly
+    df = pd.read_excel(file_path)  # Uses relative path
 else:
     st.error(f"❌ Error: The file '{file_path}' is missing. Check if it was uploaded correctly.")
 
@@ -27,3 +23,4 @@ if search_term:
         st.write("No results found.")
 else:
     st.write("Enter a search term above to find committee assignments.")
+
