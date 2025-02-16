@@ -29,3 +29,11 @@ if search_term:
         st.write("No results found.")
 else:
     st.write("Enter a search term above to find committee assignments.")
+
+# Additional section: List of All Chairs
+st.subheader("All Committee Chairs")
+chairs = df[df['Role'].str.lower() == 'chair']
+if not chairs.empty:
+    st.dataframe(chairs, use_container_width=True)
+else:
+    st.write("No chairs found.")
